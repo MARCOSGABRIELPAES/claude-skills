@@ -1,0 +1,7 @@
+interface:
+  display_name: "Google Ads + SEO Growth"
+  short_description: "Ads, SEO, prospecção e precificação focados em conversão"
+  default_prompt: "Use $google-ads-seo-growth para diagnosticar o negócio, desenhar a medição, estruturar Google Ads e SEO, encontrar clientes ideais e precificar a proposta."
+
+policy:
+  allow_implicit_invocation: true

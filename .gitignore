@@ -1,0 +1,9 @@
+# Credenciais e estado local — nunca versionar
+.credentials.json
+.env
+.env.*
+*.key
+*.pem
+node_modules/
+.DS_Store
+Thumbs.db

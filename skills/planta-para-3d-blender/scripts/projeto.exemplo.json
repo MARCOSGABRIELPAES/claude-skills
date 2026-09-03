@@ -1,0 +1,14 @@
+{
+  "_comentario": "Copie para projeto.json na pasta de trabalho e ajuste. As cotas z sao do piso acabado de cada pavimento; se houver corte, tire delas o valor real em vez de estimar.",
+  "escala_px_por_m": 86.80,
+  "origem_px": [6500, 1100],
+  "rotacao_graus": 0.39,
+  "downsample": 2,
+  "niveis": {
+    "G1": {"arquivo": "plantas/66_TERREO.jpg",    "z": 0.00,  "rotulo": "01_Terreo",     "tem_agua": true,  "tem_vaga": true},
+    "G2": {"arquivo": "plantas/67_PILOTIS01.jpg", "z": 3.00,  "rotulo": "02_Pilotis01",  "tem_agua": false, "tem_vaga": true},
+    "G3": {"arquivo": "plantas/68_PILOTIS02.jpg", "z": 6.00,  "rotulo": "03_Pilotis02",  "tem_agua": false, "tem_vaga": true},
+    "L1": {"arquivo": "plantas/69_LAZER01.jpg",   "z": 9.00,  "rotulo": "04_Lazer01",    "tem_agua": true,  "tem_vaga": false},
+    "L2": {"arquivo": "plantas/70_LAZER02.jpg",   "z": 12.60, "rotulo": "05_Lazer02",    "tem_agua": true,  "tem_vaga": false}
+  }
+}
