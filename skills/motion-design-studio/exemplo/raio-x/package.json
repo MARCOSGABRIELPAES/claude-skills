@@ -1,0 +1,17 @@
+{
+  "name": "raio-x-film",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "stills": "node ../../scripts/render.mjs --root . --stills 0.6,1.2,2.2,3.0,3.8,4.6,5.1,5.8,6.8,7.6",
+    "rascunho": "node ../../scripts/render.mjs --root . --fps 30 --to 8 --jpeg --out out/rascunho.mp4",
+    "render": "node ../../scripts/render.mjs --root . --fps 60 --to 8 --sub 2 --out out/video.mp4",
+    "som": "python3 ../../scripts/trilha.py --bpm 120 --dur 8 --hits 5.12,6.4 --whoosh 2.0,5.1 --silencio 4.5:5.1 --out out/trilha.wav",
+    "final": "bash ../../scripts/mux.sh out/video.mp4 out/trilha.wav out/raio-x-final.mp4"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.0.0",
+    "@fontsource/jetbrains-mono": "^5.0.0",
+    "playwright-core": "^1.56.0"
+  }
+}

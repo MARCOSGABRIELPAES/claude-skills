@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>FILME</title>
+<style>
+  /* Fontes: npm i @fontsource-variable/inter (troque pela família do style_guide.md) */
+  @font-face { font-family: 'Display'; font-weight: 100 900; src: url(node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2'); }
+
+  /* Paleta do style_guide.md — este template NÃO tem visual próprio; preencha antes de compor */
+  :root { --fundo: #111; --texto: #eee; --acento: #888; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--fundo); }
+  body { font-family: 'Display', sans-serif; color: var(--texto); }
+  #palco { position: absolute; inset: 0; transform-origin: 540px 960px; }
+  .cena, .camada { position: absolute; inset: 0; }   /* camadas com clip-path precisam de tamanho */
+  .titulo { position: absolute; left: 0; width: 1080px; text-align: center; font-weight: 750; letter-spacing: -0.045em; line-height: 1; }
+  .titulo .p { display: inline-block; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div class="cena" id="c1">
+    <!-- palavras separadas por ESPAÇO REAL; data-em = quando entra; data-sai = quando sai -->
+    <div class="titulo" style="top:760px; font-size:120px" data-sai="2.2">
+      <span class="p" data-em=".2">Primeira</span> <span class="p" data-em=".34">frase</span>
+    </div>
+  </div>
+  <div class="cena" id="c2">
+    <div class="titulo" style="top:760px; font-size:120px" data-preset="pesada">
+      <span class="p" data-em="2.5">Assinatura</span>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { clamp, lerp, prog, ease, mola, trilha, costura, ligaTitulos, rng } from './lib/motion.js';
+const $ = id => document.getElementById(id);
+const titulos = ligaTitulos(document);
+const DUR = 4;
+
+// Regra de ouro: renderAt(t) é FUNÇÃO PURA do tempo. Sem Math.random, timers, transições CSS ou estado.
+window.renderAt = async t => {
+  $('palco').style.transform = `scale(${1 + .02 * t / DUR})`; // algo sempre viajando
+
+  titulos(t);
+
+  const s = costura(t, 2.4, .26); // corte no meio do movimento, velocidades casadas
+  $('c1').style.display = t < 2.4 ? 'block' : 'none';   // display, nunca visibility
+  $('c1').style.transform = `translateX(${-s.sai * 700}px)`;
+  $('c2').style.display = t >= 2.4 ? 'block' : 'none';
+  $('c2').style.transform = `translateX(${(1 - s.entra) * 700}px)`;
+};
+
+await document.fonts.load('750 100px Display');
+await window.renderAt(0);
+window.ready = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Raio-X de IA — promo 8s</title>
+<style>
+  @font-face { font-family: 'Inter'; font-weight: 100 900; src: url(node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'JBM'; font-weight: 500; src: url(node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'JBM'; font-weight: 700; src: url(node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-700-normal.woff2) format('woff2'); }
+
+  /* paleta do style_guide.md: azul-noite, ciano de raio-x, um único acento quente */
+  :root { --fundo: #070B18; --fundo2: #10193A; --raio: #6CF0FF; --texto: #F2F5FA; --apagado: #8A93AD; --acento: #FFB547; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--fundo); }
+  body { font-family: 'Inter', sans-serif; color: var(--texto); }
+  #palco { position: absolute; inset: 0; transform-origin: 540px 960px; }
+  #bg { position: absolute; inset: -200px; }
+  #grade { position: absolute; inset: -200px; opacity: .22;
+    background-image: linear-gradient(rgba(108,240,255,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(108,240,255,.18) 1px, transparent 1px);
+    background-size: 90px 90px; }
+  .cena, .camada { position: absolute; inset: 0; }
+
+  /* tipografia: grotesk apertado em display, mono para rótulos técnicos */
+  .titulo { position: absolute; left: 0; width: 1080px; text-align: center; font-weight: 760; letter-spacing: -0.048em; line-height: 1; }
+  .titulo .p { display: inline-block; will-change: auto; }
+  .raio { color: var(--raio); }
+  .mono { font-family: 'JBM', monospace; font-weight: 500; letter-spacing: .02em; }
+
+  /* cards de processo: camada normal e camada "raio-x" idênticas em posição */
+  .card { position: absolute; left: 160px; width: 760px; height: 250px; border-radius: 36px; padding: 44px 48px; }
+  .normal .card { background: linear-gradient(160deg, #1A2550, #111A3A); box-shadow: 0 40px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.08); }
+  .xray .card { background: rgba(108,240,255,.06); border: 2px solid rgba(108,240,255,.75);
+    box-shadow: 0 0 60px rgba(108,240,255,.18), inset 0 0 40px rgba(108,240,255,.08); }
+  .card .nome { font-size: 56px; font-weight: 700; letter-spacing: -0.04em; }
+  .card .sub { font-size: 26px; color: var(--apagado); margin-top: 14px; }
+  .xray .card .sub { color: var(--raio); opacity: .85; }
+  .card .barra { position: absolute; left: 48px; right: 48px; bottom: 44px; height: 10px; border-radius: 5px; background: rgba(255,255,255,.08); }
+  .normal .card .barra i { display: block; height: 100%; width: 30%; border-radius: 5px; background: rgba(255,255,255,.18); }
+  .xray .card .barra i { display: block; height: 100%; border-radius: 5px; background: var(--raio); box-shadow: 0 0 18px var(--raio); }
+  .card .pct { position: absolute; right: 48px; top: 40px; font-size: 76px; font-weight: 700; color: var(--raio); }
+  .card .ico { position: absolute; right: 52px; top: 52px; width: 64px; height: 64px; border-radius: 18px; background: rgba(255,255,255,.08); }
+
+  #linha { position: absolute; left: 0; width: 1080px; height: 4px; background: var(--raio);
+    box-shadow: 0 0 24px 6px rgba(108,240,255,.55), 0 0 120px 30px rgba(108,240,255,.18); }
+  #rotuloScan { position: absolute; right: 40px; padding: 8px 16px; border-radius: 10px; font-size: 22px; color: var(--raio);
+    background: rgba(7,11,24,.85); border: 1px solid rgba(108,240,255,.5); }
+
+  .cta { position: absolute; left: 50%; top: 1250px; padding: 30px 58px; border-radius: 999px; font-size: 40px; font-weight: 700;
+    background: var(--acento); color: #1A1204; transform-origin: center; box-shadow: 0 24px 60px rgba(255,181,71,.35); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="palco">
+  <div id="bg"></div><div id="grade"></div>
+
+  <!-- CENA 1 — gancho (0 – 2.0 s) -->
+  <div class="cena" id="c1">
+    <div class="titulo" style="top:520px; font-size:108px">
+      <span class="p" data-em=".15">Você</span> <span class="p" data-em=".27">sabe</span><br>
+      <span class="p" data-em=".45">onde</span> <span class="p" data-em=".57">a</span> <span class="p raio" data-em=".69">IA</span><br>
+      <span class="p" data-em=".95">paga</span> <span class="p" data-em="1.07">a</span> <span class="p" data-em="1.19">conta?</span>
+    </div>
+  </div>
+
+  <!-- CENA 2 — o raio-x (2.0 – 5.1 s) -->
+  <div class="cena" id="c2">
+    <div class="camada normal" id="normal"></div>
+    <div class="camada xray" id="xray"></div>
+    <div id="linha"></div>
+    <div id="rotuloScan" class="mono">SCAN · OPERAÇÃO</div>
+  </div>
+
+  <!-- CENA 3 — conclusão + assinatura (5.1 – 8 s) -->
+  <div class="cena" id="c3">
+    <div class="titulo t3" style="top:640px; font-size:120px" data-sai="6.2" data-preset="pesada">
+      <span class="p" data-em="5.12">Mapa</span> <span class="p raio" data-em="5.26">claro.</span>
+    </div>
+    <div class="titulo t3 mono" style="top:800px; font-size:38px; font-weight:500; letter-spacing:0; color:var(--apagado)" data-sai="6.2">
+      <span class="p" data-em="5.55">antes</span> <span class="p" data-em="5.63">de</span> <span class="p" data-em="5.71">gastar</span> <span class="p" data-em="5.79">em</span> <span class="p" data-em="5.87">IA</span>
+    </div>
+    <div class="titulo t3" style="top:720px; font-size:150px" data-preset="pesada">
+      <span class="p" data-em="6.40">Raio-X</span> <span class="p raio" data-em="6.56">de IA</span>
+    </div>
+    <div class="titulo t3 mono" style="top:920px; font-size:34px; font-weight:500; letter-spacing:0; color:var(--apagado)">
+      <span class="p" data-em="6.85">diagnóstico</span> <span class="p" data-em="6.93">da</span> <span class="p" data-em="7.01">sua</span> <span class="p" data-em="7.09">operação</span>
+    </div>
+    <div class="cta" id="cta">Agende o seu →</div>
+  </div>
+</div>
+
+<script type="module">
+import { clamp, lerp, prog, ease, mola, trilha, empurrao, costura, aplica, ligaTitulos } from './lib/motion.js';
+
+const $ = id => document.getElementById(id);
+const PROCESSOS = [
+  { nome: 'Atendimento', sub: 'WhatsApp · e-mail · FAQ', alvo: 68, y: 520 },
+  { nome: 'Vendas', sub: 'qualificação de leads', alvo: 54, y: 820 },
+  { nome: 'Financeiro', sub: 'conciliação · cobrança', alvo: 41, y: 1120 },
+];
+// monta as duas camadas com a mesma geometria
+for (const camada of ['normal', 'xray']) $(camada).innerHTML = PROCESSOS.map((p, i) => `
+  <div class="card" data-i="${i}" style="top:${p.y}px">
+    <div class="nome">${p.nome}</div><div class="sub ${camada === 'xray' ? 'mono' : ''}">${camada === 'xray' ? 'potencial de automação' : p.sub}</div>
+    ${camada === 'xray' ? `<div class="pct mono">0%</div>` : `<div class="ico"></div>`}
+    <div class="barra"><i></i></div>
+  </div>`).join('');
+const cards = cam => [...$(cam).querySelectorAll('.card')];
+
+// linha de scan: desce de 380 a 1500 em 1.9 s com curva de empurrão (máquina: rápida e uniforme no meio)
+const SCAN_T0 = 2.55, SCAN_DUR = 1.9, SCAN_Y0 = 380, SCAN_Y1 = 1500;
+const scanY = t => lerp(SCAN_Y0, SCAN_Y1, empurrao(t, SCAN_T0, SCAN_DUR));
+// instante em que a linha cruza o meio de cada card (busca única, determinística)
+const passa = PROCESSOS.map(p => { let t = SCAN_T0; while (scanY(t) < p.y + 125 && t < SCAN_T0 + SCAN_DUR) t += 1 / 240; return t; });
+
+const titulos = ligaTitulos(document);
+const c1 = $('c1'), c2 = $('c2'), c3 = $('c3');
+
+window.renderAt = async t => {
+  // câmera: empurrão lento e contínuo — algo está sempre viajando
+  $('palco').style.transform = `scale(${1 + .025 * t / 8})`;
+  // fundo: gradiente com direção que deriva, grade em paralaxe
+  const gx = 30 + 20 * Math.sin(t * .35), gy = 25 + 10 * t / 8;
+  $('bg').style.background = `radial-gradient(1100px 900px at ${gx}% ${gy}%, var(--fundo2), var(--fundo) 70%)`;
+  $('grade').style.transform = `translate(${-t * 14}px, ${-t * 22}px)`;
+
+  titulos(t);
+
+  // CENA 1 → 2: direção dominante = para a esquerda; corte no meio do movimento, velocidades casadas
+  const s12 = costura(t, 2.0, .26);
+  c1.style.display = t < 2.0 ? 'block' : 'none';
+  c1.style.transform = `translateX(${-s12.sai * 760}px)`;
+  c1.style.filter = s12.sai > .02 ? `blur(${s12.sai * 10}px)` : 'none';
+
+  // CENA 2
+  const s23 = costura(t, 5.1, .26); // saída PARA CIMA = conclusão (direção reservada, com significado)
+  c2.style.display = t >= 2.0 && t < 5.1 ? 'block' : 'none';
+  if (t >= 2.0 && t < 5.1) {
+    const entra = ease.out4((t - 2.0) / .26);
+    c2.style.transform = `translate(${(1 - entra) * 760}px, ${-s23.sai * 900}px)`;
+    c2.style.filter = (1 - entra) + s23.sai > .02 ? `blur(${((1 - entra) + s23.sai) * 10}px)` : 'none';
+    // cards chegam em cascata, corpo primeiro
+    for (const cam of ['normal', 'xray']) cards(cam).forEach((el, i) => {
+      // a cascada começa ANTES do corte: no primeiro quadro da cena já há um portador visível
+      const s = mola(t - 1.92 - i * .07, 'base');
+      el.style.transform = `translateY(${(1 - s) * 90}px)`; el.style.opacity = clamp(s * 3);
+    });
+    // assinatura: o raio-x revela a outra camada ACIMA da linha
+    const y = scanY(t), ativa = t >= SCAN_T0 - .05;
+    const yy = ativa ? y : SCAN_Y0 - 200;
+    $('xray').style.clipPath = `inset(0 0 ${1920 - yy}px 0)`;
+    $('normal').style.clipPath = `inset(${yy}px 0 0 0)`;
+    const brilho = ativa ? clamp(prog(t, SCAN_T0 - .05, .1)) * (1 - prog(t, SCAN_T0 + SCAN_DUR, .25)) : 0;
+    $('linha').style.top = `${y}px`; $('linha').style.opacity = brilho;
+    $('rotuloScan').style.top = `${y - 54}px`; $('rotuloScan').style.opacity = brilho;
+    // contadores: cada número sobe com mola quando a linha cruza o card (estalo -> mola, sem rampa linear)
+    cards('xray').forEach((el, i) => {
+      const v = PROCESSOS[i].alvo * mola(t - passa[i], 'ui');
+      el.querySelector('.pct').textContent = `${Math.round(v)}%`;
+      el.querySelector('.barra i').style.width = `${v}%`;
+    });
+  }
+
+  // CENA 3: entra de baixo, em velocidade (par da saída para cima)
+  c3.style.display = t >= 5.1 ? 'block' : 'none';
+  c3.style.transform = `translateY(${(1 - ease.out4((t - 5.1) / .26)) * 900}px)`;
+  const pc = mola(t - 7.15, 'ui');
+  $('cta').style.opacity = clamp(pc * 2);
+  $('cta').style.transform = `translateX(-50%) translateY(${(1 - pc) * 40}px) scale(${lerp(.86, 1, pc)})`;
+};
+
+await Promise.all(['760 100px Inter', '500 30px JBM', '700 30px JBM'].map(f => document.fonts.load(f)));
+await document.fonts.ready;
+await window.renderAt(0);
+window.ready = true;
+</script>
+</body>
+</html>
